@@ -16,23 +16,27 @@ import java.io.IOException;
 public class cmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)){
+        if (!(sender instanceof Player)) {
             sender.sendMessage(">>请务必以玩家身份打开!");
             return true;
         }
         Player p = (Player) sender;
         if (label.equalsIgnoreCase("lb")) {
-            if (args[0].equalsIgnoreCase("mundee")){
+            if (args[0].equalsIgnoreCase("mundee")) {
                 MySql.getPlayerUP(p, Integer.parseInt(args[1]));
                 return false;
+            }
+            if (args[0] == null){
+                p.sendMessage("未输入内容!");
+                return true;
             }
             try {
                 if (MySql.getPlayerLb(p) > 0) {
                     String say = "";
                     for (int i = 0; i < args.length; i++) {
-                        say = say + args[i];
+                        say = say + " " + args[i];
                     }
-                    say = Tool.isStringMess(p,Data.mes1,say);
+                    say = Tool.isStringMess(p, Data.mes1, say);
 
                     MySql.getPlayerUP(p, -1);
                     Tool.messALL(say);
@@ -58,9 +62,9 @@ public class cmd implements CommandExecutor {
                     try {
                         String say = "";
                         for (int i = 1; i < args.length; i++) {
-                            say = say + args[i];
+                            say = say + " " + args[i];
                         }
-                        say = Tool.isStringMess(p,Data.mes2,say);
+                        say = Tool.isStringMess(p, Data.mes2, say);
                         MySql.getPlayerUP(p, -1);
                         Tool.messALL(say);
                         for (int data : Data.Server) {
