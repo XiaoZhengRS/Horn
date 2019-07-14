@@ -1,0 +1,9 @@
+name: Horn
+version: ${project.version}
+main: com.xiaozhengkeji.horn.Horn
+authors: [XiaoZheng]
+depend: [VexView]
+description: QQ1419158026
+commands:
+  lb:
+  lbsys:

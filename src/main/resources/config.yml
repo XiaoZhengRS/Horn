@@ -1,0 +1,32 @@
+##mysql数据库配置
+
+#是否开起新版本JDBC连接程序(如果数据库版本在8.0+请设置为true)
+Mysql8.0: true
+#是否使用自定义JDBC
+MysqlDIY: fales
+#自定义的JDBC驱动类
+MysqlDIYConfig: com.mysql.cj.jdbc.Driver
+#默认的JDBC驱动类
+MysqlConfigDefault: com.mysql.jdbc.Driver
+#JDBC连接语句    jdbc:mysql://[地址]/[库名称]
+MysqlConfigLogin: jdbc:mysql://127.0.0.1:3306/Demo
+#用户名:
+MysqlUserName: root
+#密码:
+MysqlUserPassword: root
+#是否初始化
+Mysql: fales
+
+
+
+##转发配置
+#本服务端使用端口   如果转发到外部或者接受外部端口则需要外网映射
+ServerProt: 20000
+#需要转发的服务端端口
+ServerMass:
+  - 20001
+  - 20002
+
+#消息格式
+普通喇叭: "§4[§5大喇叭§4]<player>:<mes>"
+系统喇叭: "§4[§5系统消息§4]:<mes>"
