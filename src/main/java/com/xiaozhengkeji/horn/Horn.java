@@ -5,6 +5,7 @@ import com.xiaozhengkeji.horn.data.Data;
 import com.xiaozhengkeji.horn.listener.RegListeners;
 import com.xiaozhengkeji.horn.mysql.MySql;
 import com.xiaozhengkeji.horn.tcp.TcpServer;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,7 +40,7 @@ public final class Horn extends JavaPlugin {
         cmd.go();
         Bukkit.getLogger().info("§4>转发创建完成!");
         this.getCommand("lb").setExecutor(new cmd());
-        this.getCommand("lbsys").setExecutor(new cmd());
+        this.getCommand("lbsys").setExecutor(new cmd2());
         Bukkit.getLogger().info("检测到您使用了Mysql模式,开始为您测试连接");
         try {
             Class.forName(Data.MysqlClass);
@@ -60,6 +61,7 @@ public final class Horn extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new RegListeners(), this);
+        PlaceholderAPI.registerPlaceholderHook("lb", new papi());
         Bukkit.getLogger().info("§4>进服初始化完成!!");
     }
 

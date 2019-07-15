@@ -2,7 +2,7 @@ name: Horn
 version: ${project.version}
 main: com.xiaozhengkeji.horn.Horn
 authors: [XiaoZheng]
-depend: [VexView]
+depend: [VexView, PlaceholderAPI]
 description: QQ1419158026
 commands:
   lb:

@@ -21,75 +21,41 @@ public class cmd implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        if (label.equalsIgnoreCase("lb")) {
-            if (args[0].equalsIgnoreCase("mundee")) {
-                MySql.getPlayerUP(p, Integer.parseInt(args[1]));
-                return false;
-            }
-            if (args[0] == null){
-                p.sendMessage("未输入内容!");
-                return true;
-            }
-            try {
-                if (MySql.getPlayerLb(p) > 0) {
-                    String say = "";
-                    for (int i = 0; i < args.length; i++) {
-                        say = say + " " + args[i];
-                    }
-                    say = Tool.isStringMess(p, Data.mes1, say);
-
-                    MySql.getPlayerUP(p, -1);
-                    Tool.messALL(say);
-                    for (int data : Data.Server) {
-                        try {
-                            new TcpClient(data, say).talk();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else {
-                    p.sendMessage("喇叭数量不足");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (args[0] == null) {
+            p.sendMessage("未输入内容!");
             return true;
         }
+        if (args[0].equalsIgnoreCase("mundee")) {
+            MySql.getPlayerUP(p, Integer.parseInt(args[1]));
+            return false;
+        }
 
-        if (label.equalsIgnoreCase("lbsys")) {
-            if (p.hasPermission("horn.sys")) {
-                if (args[0].equalsIgnoreCase("lb")) {
+
+        try {
+            if (MySql.getPlayerLb(p) > 0) {
+                String say = "";
+                for (int i = 0; i < args.length; i++) {
+                    say = say + " " + args[i];
+                }
+                say = Tool.isStringMess(p, Data.mes1, say);
+
+                MySql.getPlayerUP(p, -1);
+                Tool.messALL(say);
+                for (int data : Data.Server) {
                     try {
-                        String say = "";
-                        for (int i = 1; i < args.length; i++) {
-                            say = say + " " + args[i];
-                        }
-                        say = Tool.isStringMess(p, Data.mes2, say);
-                        MySql.getPlayerUP(p, -1);
-                        Tool.messALL(say);
-                        for (int data : Data.Server) {
-                            try {
-                                new TcpClient(data, say).talk();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } catch (Exception e) {
+                        new TcpClient(data, say).talk();
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
+            } else {
+                p.sendMessage("喇叭数量不足");
             }
-            if (args[0].equalsIgnoreCase("give")) {
-                MySql.getPlayerUP(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                p.sendMessage("增减完成!");
-                return true;
-            }
-        } else {
-            p.sendMessage("权限不足:必须拥有:horn.sys");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return true;
 
-
-        return false;
     }
 
     public static void go() {
